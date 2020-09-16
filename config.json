@@ -1,0 +1,11 @@
+{
+  "PORT": 3000,
+  "express_debug": true,
+  "mongo_host": "cluster0.wi38i.mongodb.net",
+  "mongo_user": "williams",
+  "mongo_pass": "pwd",
+  "mongo_database": "flint-messenger",
+  "mongo_debug": true,
+  "session_cookie_name": "session_id",
+  "session_secret": "mySessionSecretKey"
+}

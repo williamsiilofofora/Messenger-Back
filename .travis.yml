@@ -1,0 +1,21 @@
+language: node_js
+node_js: 12
+stages: 
+  - global testing
+  - deployement
+
+jobs:
+  include:
+  - stage: Transpile
+    name: transpile
+    install: npm install
+    script: npm run build
+
+  - stage: global testing
+    name: compile
+    install: npm install
+    script: npm build
+    
+  - stage: deployement
+    name: skip the heroku TODO
+    script: skip
