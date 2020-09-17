@@ -11,7 +11,7 @@ async function getAllMessages(user: IProfile, conversationId?: string) {
     };
     if (!conversationId) delete query.$and;
     return await Message.find(query, null, {
-      sort: { createdAt: 1 },
+      sort: { createdAt: 'asc' },
     });
     // return messages;
   } catch (error) {
@@ -19,27 +19,8 @@ async function getAllMessages(user: IProfile, conversationId?: string) {
   }
 }
 
-const createMessage = async (
-  user: IProfile,
-  conversationId: string,
-  targets: string[],
-  content: string
-) => {
-    try {
-        const newMessage = new Message({
-            conversationId: conversationId,
-            emitter: user._id,
-            targets: targets,
-            content: content,
-        });
-        newMessage.save();
-        
-            console.log('nouveau message', newMessage);
-            return newMessage;
-
-        } catch (error) {
-            throw new Error(error)
-    }
+async function createMessage(conversationId: string, targets: string[], emitter: string, content: string) {
+  const message = new Message({ conversationId, targets, emitter, content })
+  return await message.save();
 }
-
 export { getAllMessages, createMessage };
