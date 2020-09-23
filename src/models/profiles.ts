@@ -8,12 +8,13 @@ export interface IProfile extends Document {
   email: string;
   lastname: string;
   firstname: string;
-  conversationSeen: { [conversationId: string] : string}
+  conversationSeen: { [conversationId: string]: string };
+  socket?: string;
   getFullName: () => string;
   setPassword: (password: string) => void;
   verifyPassword: (password: string) => boolean;
   getSafeProfile: () => ISafeProfile;
-  updateSeen:(conversationId: string, seenDate: string) => void;
+  updateSeen: (conversationId: string, seenDate: string) => void;
 }
 
 export type ISafeProfile = Pick<
@@ -26,7 +27,8 @@ const profileSchema = new Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   password: { type: String, required: true },
-  conversationSeen: {type: Object},
+  conversationSeen: { type: Object },
+  socket: { type: String },
 }); 
 
 profileSchema.methods.getSafeProfile = function (): ISafeProfile {
