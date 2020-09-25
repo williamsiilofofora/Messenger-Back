@@ -5,6 +5,8 @@ import { IProfile, Profile } from "../models/profiles";
 import { io } from "../socket";
 
 const router = Router();
+console.log(router);
+
 
 router.get('/', authenticationRequired, async (req: Request, res: Response) => {
   if (!req.user) { return res.status(401).send('You must be authenticated') };
