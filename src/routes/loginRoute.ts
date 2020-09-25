@@ -33,9 +33,19 @@ router.post("/", (req: Request, res: Response) => {
   })(req, res);
 });
 
-router.get('/logout', function (req, res) {
-  req.logout();
-  res.redirect(301, '/login');
+router.get("/logout", (req: Request, res: Response) => {
+  if (req.isAuthenticated()) req.logout();
+  req.session?.destroy((error) => {
+    if (error) {
+      return res
+        .status(200)
+        .send("User logout success but session not destroy");
+    } else {
+      res.clearCookie("session_cookie_id");
+      req.session = undefined;
+      return res.status(200).send("User logout success");
+    }
+  });
 });
 
 export default router;
